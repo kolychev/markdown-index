@@ -30,13 +30,13 @@ glob(dir + '/**/*.md', function (err, files) {
         // Use empty options arg to avoid infinite recursion.
         var tok = originalLinkify(tok, text, slug, {})
         // Prepend filename to links.
-        tok.content = tok.content.replace('#', file + '#')
+        tok.content = tok.content.replace('#', encodeURIComponent(file) + '#')
         return tok
       }
     })
 
     // Add filename as a heading.
-    return '### [' + filenameSlug + '](' + file + ')\n\n' + table.content
+    return '### [' + filenameSlug + '](' + encodeURIComponent(file) + ')\n\n' + table.content
   })
 
   process.stdout.write(tables.join('\n\n'))
